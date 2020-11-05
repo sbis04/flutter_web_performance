@@ -56,8 +56,10 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed('/description', arguments: coffeeList[index]);
+                      Navigator.of(context).pushNamed(
+                        '/description',
+                        arguments: coffeeList[index],
+                      );
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
