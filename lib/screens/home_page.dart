@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_web_performance/model/coffee.dart';
-import 'package:flutter_web_performance/screens/description_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
