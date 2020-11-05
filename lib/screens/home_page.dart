@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_web_performance/model/coffee.dart';
+import 'package:flutter_web_performance/screens/description_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -53,58 +54,64 @@ class _HomePageState extends State<HomePage> {
                 physics: BouncingScrollPhysics(),
                 itemCount: coffeeList.length,
                 itemBuilder: (context, index) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10),
-                      Text(
-                        coffeeList[index].name,
-                        style: TextStyle(
-                            color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        coffeeList[index].description,
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                      SizedBox(height: 10),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Ratio: ',
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed('/description', arguments: coffeeList[index]);
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10),
+                        Text(
+                          coffeeList[index].name,
                           style: TextStyle(
-                              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: coffeeList[index].ratio,
-                              style: TextStyle(
-                                color: Colors.green[800],
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
+                              color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Cup: ',
-                          style: TextStyle(
-                              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: coffeeList[index].cup,
-                              style: TextStyle(
-                                color: Colors.green[800],
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
+                        SizedBox(height: 5),
+                        Text(
+                          coffeeList[index].description,
+                          style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                        SizedBox(height: 10),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Ratio: ',
+                            style: TextStyle(
+                                color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: coffeeList[index].ratio,
+                                style: TextStyle(
+                                  color: Colors.green[800],
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Cup: ',
+                            style: TextStyle(
+                                color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: coffeeList[index].cup,
+                                style: TextStyle(
+                                  color: Colors.green[800],
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
+                    ),
                   );
                 },
               ),
