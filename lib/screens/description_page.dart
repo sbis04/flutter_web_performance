@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_performance/model/coffee.dart';
 
+const backKey = ValueKey('backKey');
+
 class DescriptionPage extends StatelessWidget {
   final Coffee coffee;
 
@@ -16,7 +18,7 @@ class DescriptionPage extends StatelessWidget {
           coffee.name,
           style: TextStyle(color: Colors.brown),
         ),
-        leading: BackButton(color: Colors.brown),
+        leading: BackButton(key: backKey, color: Colors.brown),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

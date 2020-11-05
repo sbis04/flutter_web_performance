@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_performance/model/coffee.dart';
 
+const listItemKey = ValueKey('listItemKey');
+const aboutPageKey = ValueKey('aboutPageKey');
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -61,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     child: Column(
+                      key: listItemKey,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 10),
