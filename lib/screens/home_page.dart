@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_performance/model/coffee.dart';
 
 const listItemKey = ValueKey('listItemKey');
-const aboutPageKey = ValueKey('aboutPageKey');
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,11 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    parseJsonData();
-  }
+  int _coffeeCount = 0;
 
   Future<List<Coffee>> parseJsonData() async {
     String jsonData = await DefaultAssetBundle.of(context).loadString('assets/data.json');
@@ -26,9 +21,12 @@ class _HomePageState extends State<HomePage> {
     List<Coffee> coffeeList = coffeeTypes.coffee;
 
     return coffeeList;
+  }
 
-    // print('Name: ${coffee[0].name}');
-    // print('Description: ${coffee[0].description}');
+  void _incrementCoffee() {
+    setState(() {
+      _coffeeCount++;
+    });
   }
 
   @override
@@ -43,6 +41,22 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.brown),
         ),
         centerTitle: true,
+        actions: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Text(
+                '$_coffeeCount',
+                style: TextStyle(color: Colors.brown[300], fontSize: 22),
+              ),
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCoffee,
+        child: Icon(Icons.add_shopping_cart),
+        backgroundColor: Colors.brown,
       ),
       body: FutureBuilder(
         future: parseJsonData(),
@@ -53,10 +67,10 @@ class _HomePageState extends State<HomePage> {
             return Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               child: ListView.builder(
-                physics: BouncingScrollPhysics(),
                 itemCount: coffeeList.length,
                 itemBuilder: (context, index) {
                   return InkWell(
+                    key: index == 0 ? listItemKey : null,
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         '/description',
@@ -64,7 +78,6 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     child: Column(
-                      key: listItemKey,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 10),
